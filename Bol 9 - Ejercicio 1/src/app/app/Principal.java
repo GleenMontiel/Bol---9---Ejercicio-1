@@ -44,7 +44,7 @@ public class Principal extends JFrame implements KeyListener {
 
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                int res = JOptionPane.showConfirmDialog(null, "Deseas cerrar el programa?", "Bol 9 - Ejercicio 1",
+                int res = JOptionPane.showConfirmDialog(null, "¿Deseas cerrar el programa?", "Bol 9 - Ejercicio 1",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (res == JOptionPane.OK_OPTION)
                     e.getWindow().dispose();
@@ -82,7 +82,13 @@ public class Principal extends JFrame implements KeyListener {
 
         @Override
         public void mouseMoved(java.awt.event.MouseEvent e) {
-            setTitle(String.format("Control de ratón – (X:%d, Y:%d)", e.getX(), e.getY()));
+            if (e.getSource() == btn1 || e.getSource() == btn2) {
+                setTitle(String.format("%s – (X:%d, Y:%d)", getTitulo(), e.getX() + e.getComponent().getX(),
+                        e.getY() + e.getComponent().getY()));
+            } else {
+                setTitle(String.format("%s – (X:%d, Y:%d)", getTitulo(), e.getX(), e.getY()));
+            }
+
         }
 
         @Override

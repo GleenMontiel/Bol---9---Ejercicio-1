@@ -12,7 +12,9 @@ public class Secundario extends JDialog implements ActionListener, ItemListener 
     private JTextField txtTitulo;
     private JComboBox<String> cmb;
     Principal f = (Principal) this.getOwner();
-    String[] colors = { "Verde", "Rojo", "Blanco", "Azul" };
+    ColorUIResource colors[] = { new ColorUIResource(Color.GREEN), new ColorUIResource(Color.RED),
+            new ColorUIResource(Color.WHITE), new ColorUIResource(Color.BLUE) };
+    String[] c = { "Verde", "Rojo", "Blanco", "Azul" };
 
     public Secundario(Principal f) {
 
@@ -31,39 +33,12 @@ public class Secundario extends JDialog implements ActionListener, ItemListener 
         lblColor = new JLabel("Selecciona el color para los botones:");
         add(lblColor);
 
-        cmb = new JComboBox<String>(colors);
+        cmb = new JComboBox<String>(c);
         cmb.setSize(100, 100);
         cmb.setLocation(200, 500);
-        cmb.setMaximumRowCount(8);
-        cmb.setSelectedIndex(3);
         cmb.addItemListener(this);
         this.add(cmb);
 
-    }
-
-    public ColorUIResource chooseColor(String s) {
-
-        ColorUIResource color = new ColorUIResource(Color.BLUE);
-
-        switch (s) {
-            case "Verde":
-                color = new ColorUIResource(Color.GREEN);
-                break;
-
-            case "Rojo":
-                color = new ColorUIResource(Color.RED);
-                break;
-
-            case "Blanco":
-                color = new ColorUIResource(Color.WHITE);
-                break;
-
-            case "Azul":
-                color = new ColorUIResource(Color.BLUE);
-                break;
-
-        }
-        return color;
     }
 
     @Override
@@ -76,6 +51,6 @@ public class Secundario extends JDialog implements ActionListener, ItemListener 
     @Override
     public void itemStateChanged(ItemEvent e) {
 
-        f.setColor(chooseColor(cmb.getSelectedItem().toString()));
+        f.setColor(colors[cmb.getSelectedIndex()]);
     }
 }
